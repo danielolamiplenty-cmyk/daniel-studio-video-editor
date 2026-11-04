@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10121b">
+<title>DANIEL STUDIO - Video Editor</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <h2>🎬 DANIEL STUDIO</h2>
+  <span>VIDEO EDITOR</span>
+</header>
+
+<main>
+  <section class="editor">
+    <h3>Your Creative Studio</h3>
+
+    <label for="videoInput" class="upload">
+      ＋ Import Your Video
+    </label>
+
+    <input type="file" id="videoInput" accept="video/*">
+
+    <video id="video" controls></video>
+
+    <div class="tools">
+      <button onclick="playVideo()">▶ Play / Pause</button>
+      <button onclick="addText()">T Add Text</button>
+      <button onclick="changeFilter()">◐ Filter</button>
+    </div>
+
+    <input id="caption" placeholder="Enter your video title">
+
+    <p id="previewText"></p>
+
+    <button onclick="downloadVideo()">Export Video</button>
+  </section>
+</main>
+
+<footer>
+  POWERED BY DANIEL STUDIO
+</footer>
+
+<script>
+const video = document.getElementById("video");
+const input = document.getElementById("videoInput");
+
+input.addEventListener("change", function() {
+  const file = this.files[0];
+  if (file) {
+    video.src = URL.createObjectURL(file);
+    video.style.display = "block";
+  }
+});
+
+function playVideo() {
+  if (video.paused) video.play();
+  else video.pause();
+}
+
+function addText() {
+  document.getElementById("previewText").textContent =
+  document.getElementById("caption").value;
+}
+
+let filters = ["none", "grayscale(1)", "sepia(1)", "saturate(2)"];
+let filterIndex = 0;
+
+function changeFilter() {
+  filterIndex = (filterIndex + 1) % filters.length;
+  video.style.filter = filters[filterIndex];
+}
+
+function downloadVideo() {
+  alert("Video export will be added in the next development stage.");
+}
+</script>
+
+</body>
+</html>
